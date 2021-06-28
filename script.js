@@ -36,7 +36,7 @@ var container=$(".container")
         textDiv.addClass('col-sm-9');
 
         var textArea = $('<textarea>');
-        textArea.attr('id', 'text-' + militaryHours[index])
+        textArea.attr('id', 'text-' + militaryHours[index]);
         textArea.addClass(`form-control h-100 p-0 ${classColor}`);
 
         textDiv.append(textArea);
@@ -55,19 +55,20 @@ var container=$(".container")
 
             var saveText = myTextArea.val();
 
-            document.getElementById("save").addEventListener("click", function ())
-    
-
-            // save the text to localstorage, key - value ==== hour - text
-            // key   value
-            //  9    "Hello"
-            // 10     "Hi"
-            
-          
-
+            if(localStorage.getItem('tasks') == null) {
+                localStorage.setItem('tasks', '[]');
         
+            }
+            var tasks = JSON.parse(localStorage.getItem('tasks'));
+            tasks.push({
+                hour: militaryHours[index],
+                text: saveText
+            });
+        
+            localStorage.setItem('tasks', tasks);  
+        })
 
-        {var icon = $('<i>');
+        var icon = $('<i>');
         icon.addClass('far fa-save');
 
         saveButton.append(icon);
@@ -87,58 +88,4 @@ var container=$(".container")
 $('#currentDay').text(moment().format("dddd, MMMM Do YYYY"));
 
 
-console.log(currentHour)
-
-function save () {
-    var new_tasks = document.getElementById('textArea').text;
-    if(localStorage.getItem('tasks') == null) {
-        localStorage.setItem('tasks', '[]');
-
-    }
-    var tasks = JSON.parse(localStorage.getItem('tasks'));
-    tasks.push(tasks);
-
-    localStorage.setItem('tasks');
-}
-
-// var scheduleE1 = $("#schedule");
-// var times = [];
-
-// for (var i = 9; i < 18; i++) {
-//     var newObj = {
-//         time: i,
-//         note: "",
-//     };
-
-//     times.push(newObj);
-// }
-
-// console.log(scheduleE1);
-
-// for (var i = 0; i < times.length; i++) {
-//     var tr = $("<tr>").attr("id", i);
-//     var timeDisplay = $("<td>");
-
-//     var now = moment().toISOString();
-//     var otherTime = moment().hour(times[i].time).toISOString();
-
-//     if (otherTime < now) {
-//         timeDisplay.attr("class", "past");
-//     } else {
-//         timeDisplay.attr("class", "future");
-//     }
-
-//     if (times[i].time < 12) {
-//         timeDisplay.text(`${times[i].time} am`);
-//     } else if (times[i].time ===12) {
-//         timeDisplay.text(`${times[i].time} pm`);
-//     } else {
-//         timeDisplay.text(`${times[i].time = 12} pm`);
-//     }
-// }
-
-// ul.addEventListener('click', (event) => {
-//     if(event.target.tagname === 'saveBtn') {
-//         const button = event.target;
-//         const li = button.parentNode;
-//         const ul = l
+console.log(currentHour);
