@@ -55,16 +55,19 @@ var container=$(".container")
 
             var saveText = myTextArea.val();
 
+            document.getElementById("save").addEventListener("click", function ())
+    
+
             // save the text to localstorage, key - value ==== hour - text
             // key   value
             //  9    "Hello"
             // 10     "Hi"
-
             
+          
 
-        })
+        
 
-        var icon = $('<i>');
+        {var icon = $('<i>');
         icon.addClass('far fa-save');
 
         saveButton.append(icon);
@@ -85,6 +88,18 @@ $('#currentDay').text(moment().format("dddd, MMMM Do YYYY"));
 
 
 console.log(currentHour)
+
+function save () {
+    var new_tasks = document.getElementById('textArea').text;
+    if(localStorage.getItem('tasks') == null) {
+        localStorage.setItem('tasks', '[]');
+
+    }
+    var tasks = JSON.parse(localStorage.getItem('tasks'));
+    tasks.push(tasks);
+
+    localStorage.setItem('tasks');
+}
 
 // var scheduleE1 = $("#schedule");
 // var times = [];
@@ -126,7 +141,4 @@ console.log(currentHour)
 //     if(event.target.tagname === 'saveBtn') {
 //         const button = event.target;
 //         const li = button.parentNode;
-//         const ul = li.parentNode;
-//     }
-// })
-  
+//         const ul = l
